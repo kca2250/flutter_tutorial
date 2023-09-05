@@ -1,7 +1,10 @@
-// ignore_for_file: sort_constructors_first
-
 import 'package:flutter_training/model/weather.dart';
 
-class WeatherController extends Weather {
-  WeatherController(super.weatherCondition);
+class WeatherController {
+  final Weather _weather = Weather(weatherCondition: '');
+
+  // _weatherのgetWeatherIcon()を呼び出して天気アイコンパスを取得する
+  String getIconPath() {
+    return _weather.getWeatherIcon()!;
+  }
 }

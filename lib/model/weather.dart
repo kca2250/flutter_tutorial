@@ -1,16 +1,27 @@
+import 'package:yumemi_weather/yumemi_weather.dart';
+
 class Weather {
-  // constructor
-  Weather(this.weatherCondition);
-  // instance variable
+  // weatherConditionを引数に取るコンストラクタ
+  Weather({required this.weatherCondition});
+
+  // weatherConditionを定義
   final String weatherCondition;
 
-  // svg file path
+  // iconのパスを定義
   final _sunnyIcon = 'images/sunny.svg';
   final _cloudyIcon = 'images/cloudy.svg';
   final _rainyIcon = 'images/rainy.svg';
 
-  // instance method
+  // yumemi_weatherパッケージを使って天気を取得する
+  String fetchWeather() {
+    final yumemiWeather = YumemiWeather();
+    final weather = yumemiWeather.fetchSimpleWeather();
+    return weather;
+  }
+
+  // fetchWeather()から返される値に応じて、天気アイコンパスを返す
   String? getWeatherIcon() {
+    final weatherCondition = fetchWeather();
     switch (weatherCondition) {
       case 'cloudy':
         return _cloudyIcon;
