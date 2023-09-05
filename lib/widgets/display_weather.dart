@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
-import 'package:yumemi_weather/yumemi_weather.dart';
 
 class DisplayWeather extends StatefulWidget {
   const DisplayWeather({super.key});
@@ -26,16 +25,9 @@ class _DisplayWeatherState extends State<DisplayWeather>
     WidgetsBinding.instance.removeObserver(this);
   }
 
-  String fetchWeather() {
-    final yumemiWeather = YumemiWeather();
-    final weather = yumemiWeather.fetchSimpleWeather();
-    return weather;
-  }
-
   void changeWeatherIcon() {
-    final weatherCondition = fetchWeather();
     setState(() {
-      _weatherIcon = WeatherController(weatherCondition).getWeatherIcon()!;
+      _weatherIcon = WeatherController().getIconPath();
     });
   }
 
