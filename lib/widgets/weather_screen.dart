@@ -33,7 +33,7 @@ class _DisplayWeatherState extends State<DisplayWeather>
     });
     showSnackBar(
       context: context,
-      message: 'change weather icon: $_weatherIcon',
+      message: 'icon path: $_weatherIcon',
       color: Colors.blue,
     );
   }
