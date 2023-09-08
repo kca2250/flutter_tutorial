@@ -10,7 +10,7 @@ mixin SnackBarMixin {
       SnackBar(
         content: Text(message),
         backgroundColor: color,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }
