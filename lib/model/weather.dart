@@ -14,6 +14,7 @@ class Weather {
       final weather = yumemiWeather.fetchThrowsWeather('tokyo');
       return weather;
     } on YumemiWeatherError catch (e) {
+      print('Failed to get weather information. Error: $e');
       return 'error';
     }
   }
