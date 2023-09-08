@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
 import 'package:flutter_training/mixin/show_snackbar.dart';
 import 'package:flutter_training/mixin/transition_screen.dart';
-import 'package:flutter_training/widgets/green_screen.dart';
+import 'package:flutter_training/views/screens/green_screen.dart';
 
 class DisplayWeather extends StatefulWidget {
   const DisplayWeather({super.key});
@@ -14,7 +14,7 @@ class DisplayWeather extends StatefulWidget {
 
 class _DisplayWeatherState extends State<DisplayWeather>
     with WidgetsBindingObserver, SnackBarMixin, TransitionScreen {
-  String _weatherIcon = '';
+  String _weather = '';
 
   @override
   void initState() {
@@ -29,13 +29,38 @@ class _DisplayWeatherState extends State<DisplayWeather>
   }
 
   void changeWeatherIcon() {
+    final result = WeatherController().getWeather();
+    if (result == 'error') {
+      showAlert(context, 'Failed to get weather information.');
+      return;
+    }
     setState(() {
-      _weatherIcon = WeatherController().getIconPath();
+      _weather = result;
     });
+
     showSnackBar(
       context: context,
-      message: 'icon path: $_weatherIcon',
+      message: 'weather condition: $_weather',
       color: Colors.blue,
+    );
+  }
+
+  AlertDialog _alertBuilder(BuildContext context, {required String message}) {
+    return AlertDialog(
+      title: Text(message),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Close'),
+        ),
+      ],
+    );
+  }
+
+  void showAlert(BuildContext context, String message) {
+    showDialog<Widget>(
+      context: context,
+      builder: (context) => _alertBuilder(context, message: message),
     );
   }
 
@@ -49,19 +74,16 @@ class _DisplayWeatherState extends State<DisplayWeather>
               flex: 2,
             ),
             Center(
-              child: (_weatherIcon == '')
+              child: (_weather == '')
                   ? const SizedBox(
                       height: 200,
                       width: 200,
-                      child: Placeholder(
-                        fallbackHeight: 100,
-                        fallbackWidth: 100,
-                      ),
+                      child: Placeholder(),
                     )
                   : SizedBox(
                       width: 200,
                       height: 200,
-                      child: SvgPicture.asset(_weatherIcon),
+                      child: SvgPicture.asset('images/$_weather.svg'),
                     ),
             ),
             const Center(
