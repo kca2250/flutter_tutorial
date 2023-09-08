@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_training/mixin/transition_screen.dart';
 import 'package:flutter_training/widgets/weather_screen.dart';
 
 class GreenScreen extends StatefulWidget {
@@ -8,21 +9,15 @@ class GreenScreen extends StatefulWidget {
   State<GreenScreen> createState() => _GreenScreenState();
 }
 
-class _GreenScreenState extends State<GreenScreen> with WidgetsBindingObserver {
+class _GreenScreenState extends State<GreenScreen>
+    with WidgetsBindingObserver, TransitionScreen {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      WidgetsBinding.instance.endOfFrame.then((_) {
-        Navigator.of(context).push(
-          MaterialPageRoute<dynamic>(
-            builder: (context) {
-              return const DisplayWeather();
-            },
-          ),
-        );
-      });
-    });
+    autoTransition(
+      context,
+      screen: const DisplayWeather(),
+    );
   }
 
   @override
