@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
 import 'package:flutter_training/mixin/show_snackbar.dart';
+import 'package:flutter_training/mixin/transition_screen.dart';
 import 'package:flutter_training/widgets/green_screen.dart';
 
 class DisplayWeather extends StatefulWidget {
@@ -12,7 +13,7 @@ class DisplayWeather extends StatefulWidget {
 }
 
 class _DisplayWeatherState extends State<DisplayWeather>
-    with WidgetsBindingObserver, SnackBarMixin {
+    with WidgetsBindingObserver, SnackBarMixin, TransitionScreen {
   String _weatherIcon = '';
 
   @override
@@ -35,14 +36,6 @@ class _DisplayWeatherState extends State<DisplayWeather>
       context: context,
       message: 'icon path: $_weatherIcon',
       color: Colors.blue,
-    );
-  }
-
-  void gotoGreenScreen() {
-    Navigator.of(context).push(
-      MaterialPageRoute<dynamic>(
-        builder: (context) => const GreenScreen(),
-      ),
     );
   }
 
@@ -107,7 +100,10 @@ class _DisplayWeatherState extends State<DisplayWeather>
                     flex: 2,
                   ),
                   TextButton(
-                    onPressed: gotoGreenScreen,
+                    onPressed: () => backScreen(
+                      context,
+                      screen: const GreenScreen(),
+                    ),
                     child: const Text(
                       'Close',
                       style: TextStyle(
