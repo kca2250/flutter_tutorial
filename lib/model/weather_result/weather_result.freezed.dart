@@ -30,6 +30,7 @@ mixin _$WeatherResult {
   String get date => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false)
   bool get hasError => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +49,8 @@ abstract class $WeatherResultCopyWith<$Res> {
       @JsonKey(name: 'max_temperature') int maxTemperature,
       @JsonKey(name: 'min_temperature') int minTemperature,
       @JsonKey(name: 'date') String date,
-      @JsonKey(defaultValue: false) bool hasError});
+      @JsonKey(defaultValue: false) bool hasError,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$WeatherResultCopyWithImpl<$Res, $Val extends WeatherResult>
     Object? minTemperature = null,
     Object? date = null,
     Object? hasError = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       weatherCondition: null == weatherCondition
@@ -91,6 +94,10 @@ class _$WeatherResultCopyWithImpl<$Res, $Val extends WeatherResult>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -108,7 +115,8 @@ abstract class _$$_WeatherResultCopyWith<$Res>
       @JsonKey(name: 'max_temperature') int maxTemperature,
       @JsonKey(name: 'min_temperature') int minTemperature,
       @JsonKey(name: 'date') String date,
-      @JsonKey(defaultValue: false) bool hasError});
+      @JsonKey(defaultValue: false) bool hasError,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -127,6 +135,7 @@ class __$$_WeatherResultCopyWithImpl<$Res>
     Object? minTemperature = null,
     Object? date = null,
     Object? hasError = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_WeatherResult(
       weatherCondition: null == weatherCondition
@@ -149,6 +158,10 @@ class __$$_WeatherResultCopyWithImpl<$Res>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -161,7 +174,8 @@ class _$_WeatherResult implements _WeatherResult {
       @JsonKey(name: 'max_temperature') required this.maxTemperature,
       @JsonKey(name: 'min_temperature') required this.minTemperature,
       @JsonKey(name: 'date') required this.date,
-      @JsonKey(defaultValue: false) required this.hasError});
+      @JsonKey(defaultValue: false) required this.hasError,
+      this.errorMessage});
 
   factory _$_WeatherResult.fromJson(Map<String, dynamic> json) =>
       _$$_WeatherResultFromJson(json);
@@ -181,10 +195,12 @@ class _$_WeatherResult implements _WeatherResult {
   @override
   @JsonKey(defaultValue: false)
   final bool hasError;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'WeatherResult(weatherCondition: $weatherCondition, maxTemperature: $maxTemperature, minTemperature: $minTemperature, date: $date, hasError: $hasError)';
+    return 'WeatherResult(weatherCondition: $weatherCondition, maxTemperature: $maxTemperature, minTemperature: $minTemperature, date: $date, hasError: $hasError, errorMessage: $errorMessage)';
   }
 
   @override
@@ -200,13 +216,15 @@ class _$_WeatherResult implements _WeatherResult {
                 other.minTemperature == minTemperature) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.hasError, hasError) ||
-                other.hasError == hasError));
+                other.hasError == hasError) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, weatherCondition, maxTemperature,
-      minTemperature, date, hasError);
+      minTemperature, date, hasError, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -224,13 +242,13 @@ class _$_WeatherResult implements _WeatherResult {
 
 abstract class _WeatherResult implements WeatherResult {
   const factory _WeatherResult(
-          {@JsonKey(name: 'weather_condition')
-          required final String weatherCondition,
-          @JsonKey(name: 'max_temperature') required final int maxTemperature,
-          @JsonKey(name: 'min_temperature') required final int minTemperature,
-          @JsonKey(name: 'date') required final String date,
-          @JsonKey(defaultValue: false) required final bool hasError}) =
-      _$_WeatherResult;
+      {@JsonKey(name: 'weather_condition')
+      required final String weatherCondition,
+      @JsonKey(name: 'max_temperature') required final int maxTemperature,
+      @JsonKey(name: 'min_temperature') required final int minTemperature,
+      @JsonKey(name: 'date') required final String date,
+      @JsonKey(defaultValue: false) required final bool hasError,
+      final String? errorMessage}) = _$_WeatherResult;
 
   factory _WeatherResult.fromJson(Map<String, dynamic> json) =
       _$_WeatherResult.fromJson;
@@ -250,6 +268,8 @@ abstract class _WeatherResult implements WeatherResult {
   @override
   @JsonKey(defaultValue: false)
   bool get hasError;
+  @override
+  String? get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_WeatherResultCopyWith<_$_WeatherResult> get copyWith =>
