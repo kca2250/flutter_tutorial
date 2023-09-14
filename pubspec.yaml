@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
+  freezed_annotation: ^2.4.1
   yumemi_weather:
     git:
       url: https://github.com/yumemi-inc/flutter-training-template.git
@@ -20,6 +21,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   blendthink_lints: ^3.0.0
+  freezed: ^2.4.2
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
 
 flutter:
   uses-material-design: true

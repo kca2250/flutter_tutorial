@@ -4,6 +4,7 @@ import 'package:flutter_training/controller/weather_controller.dart';
 import 'package:flutter_training/mixin/show_snackbar.dart';
 import 'package:flutter_training/mixin/transition_screen.dart';
 import 'package:flutter_training/views/screens/green_screen.dart';
+import 'package:yumemi_weather/yumemi_weather.dart';
 
 class DisplayWeather extends StatefulWidget {
   const DisplayWeather({super.key});
@@ -14,7 +15,9 @@ class DisplayWeather extends StatefulWidget {
 
 class _DisplayWeatherState extends State<DisplayWeather>
     with WidgetsBindingObserver, SnackBarMixin, TransitionScreen {
-  String _weather = '';
+  String _weatherCondition = '';
+  String _maxTemperature = '**℃';
+  String _minTemperature = '**℃';
 
   @override
   void initState() {
@@ -29,18 +32,19 @@ class _DisplayWeatherState extends State<DisplayWeather>
   }
 
   void changeWeatherIcon() {
-    final result = WeatherController().getWeather();
-    if (result == 'error') {
-      showAlert(context, 'Failed to get weather information.');
+    final weather = WeatherController().getWeather();
+    if (weather.hasError) {
+      showAlert(context, 'Error');
       return;
     }
     setState(() {
-      _weather = result;
+      _weatherCondition = weather.weatherCondition;
+      _maxTemperature = weather.maxTemperature.toString();
+      _minTemperature = weather.minTemperature.toString();
     });
-
     showSnackBar(
       context: context,
-      message: 'weather condition: $_weather',
+      message: 'weather condition: $_weatherCondition',
       color: Colors.blue,
     );
   }
@@ -74,7 +78,7 @@ class _DisplayWeatherState extends State<DisplayWeather>
               flex: 2,
             ),
             Center(
-              child: (_weather == '')
+              child: (_weatherCondition == '')
                   ? const SizedBox(
                       height: 200,
                       width: 200,
@@ -83,31 +87,31 @@ class _DisplayWeatherState extends State<DisplayWeather>
                   : SizedBox(
                       width: 200,
                       height: 200,
-                      child: SvgPicture.asset('images/$_weather.svg'),
+                      child: SvgPicture.asset('images/$_weatherCondition.svg'),
                     ),
             ),
-            const Center(
+            Center(
               child: Padding(
                 padding: EdgeInsets.only(top: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Spacer(
+                    const Spacer(
                       flex: 2,
                     ),
                     Text(
-                      '** ℃',
-                      style: TextStyle(
+                      _minTemperature,
+                      style: const TextStyle(
                         fontSize: 18,
                         color: Colors.blue,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '** ℃',
-                      style: TextStyle(fontSize: 18, color: Colors.red),
+                      _maxTemperature,
+                      style: const TextStyle(fontSize: 18, color: Colors.red),
                     ),
-                    Spacer(
+                    const Spacer(
                       flex: 2,
                     ),
                   ],
