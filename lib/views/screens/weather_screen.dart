@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
@@ -34,7 +36,8 @@ class _DisplayWeatherState extends State<DisplayWeather>
   void changeWeatherIcon() {
     final weather = WeatherController().getWeather();
     if (weather.hasError) {
-      showAlert(context, 'Error');
+      showAlert(context, weather.errorMessage ?? 'internal error');
+
       return;
     }
     setState(() {
