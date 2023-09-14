@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
 import 'package:flutter_training/mixin/show_snackbar.dart';
 import 'package:flutter_training/mixin/transition_screen.dart';
 import 'package:flutter_training/views/screens/green_screen.dart';
-import 'package:yumemi_weather/yumemi_weather.dart';
 
 class DisplayWeather extends StatefulWidget {
   const DisplayWeather({super.key});
