@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'weather_result.freezed.dart';
 part 'weather_result.g.dart';
 
@@ -11,6 +10,7 @@ class WeatherResult with _$WeatherResult {
     @JsonKey(name: 'min_temperature') required int minTemperature,
     @JsonKey(name: 'date') required String date,
     @JsonKey(defaultValue: false) required bool hasError,
+    String? errorMessage,
   }) = _WeatherResult;
 
   factory WeatherResult.fromJson(Map<String, dynamic> json) =>

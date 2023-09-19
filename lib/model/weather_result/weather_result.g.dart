@@ -13,6 +13,7 @@ _$_WeatherResult _$$_WeatherResultFromJson(Map<String, dynamic> json) =>
       minTemperature: json['min_temperature'] as int,
       date: json['date'] as String,
       hasError: json['hasError'] as bool? ?? false,
+      errorMessage: json['errorMessage'] as String?,
     );
 
 Map<String, dynamic> _$$_WeatherResultToJson(_$_WeatherResult instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$_WeatherResultToJson(_$_WeatherResult instance) =>
       'min_temperature': instance.minTemperature,
       'date': instance.date,
       'hasError': instance.hasError,
+      'errorMessage': instance.errorMessage,
     };

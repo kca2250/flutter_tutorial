@@ -19,12 +19,13 @@ class WeatherController {
 
       return response;
     } on YumemiWeatherError catch (e) {
-      return const WeatherResult(
+      return WeatherResult(
         weatherCondition: '',
         maxTemperature: 0,
         minTemperature: 0,
         date: '',
         hasError: true,
+        errorMessage: 'エラーが発生しました: $e ',
       );
     }
   }

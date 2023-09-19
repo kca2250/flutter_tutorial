@@ -16,7 +16,7 @@ class _GreenScreenState extends State<GreenScreen>
     super.initState();
     autoTransition(
       context,
-      screen: const DisplayWeather(),
+      screen: const WeatherScreen(),
     );
   }
 
