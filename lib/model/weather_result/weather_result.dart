@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:yumemi_weather/yumemi_weather.dart';
-
 part 'weather_result.freezed.dart';
 part 'weather_result.g.dart';
 
