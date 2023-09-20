@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
+import 'package:flutter_training/mixin/screen_transition.dart';
 import 'package:flutter_training/mixin/show_snackbar.dart';
-import 'package:flutter_training/mixin/transition_screen.dart';
 import 'package:flutter_training/provider/weather_result_provider.dart';
 import 'package:flutter_training/views/widgets/buttons.dart';
 import 'package:flutter_training/views/widgets/temperatures.dart';
 import 'package:flutter_training/views/widgets/weather_image.dart';
 
 class WeatherScreen extends ConsumerWidget
-    with WidgetsBindingObserver, SnackBarMixin, TransitionScreen {
+    with WidgetsBindingObserver, SnackBarMixin, ScreenTransition {
   const WeatherScreen({super.key});
 
   AlertDialog _alertBuilder(BuildContext context, {required String message}) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/mixin/transition_screen.dart';
+import 'package:flutter_training/mixin/screen_transition.dart';
 import 'package:flutter_training/views/screens/green_screen.dart';
 
-class Buttons extends StatelessWidget with TransitionScreen {
+class Buttons extends StatelessWidget with ScreenTransition {
   const Buttons({super.key, required this.onPress});
   final void Function() onPress;
 

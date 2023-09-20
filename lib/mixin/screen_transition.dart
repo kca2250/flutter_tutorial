@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-mixin TransitionScreen {
+mixin ScreenTransition {
   // 自動遷移
   void autoTransition(
     BuildContext context, {
