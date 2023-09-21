@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-mixin SnackBarMixin {
+mixin ShowSnackBar {
   void showSnackBar({
     required BuildContext context,
     required String message,

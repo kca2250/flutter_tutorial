@@ -20,7 +20,7 @@ mixin ScreenTransition {
   }
 
   // 前の画面に戻る
-  void backScreen(BuildContext context, {required Widget screen}) {
+  void pushNewScreen(BuildContext context, {required Widget screen}) {
     Navigator.of(context).push(
       MaterialPageRoute<dynamic>(
         builder: (context) {
