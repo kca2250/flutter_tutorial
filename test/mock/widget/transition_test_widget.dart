@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/mixin/screen_transition.dart';
-
 import 'transition_test_next_widget.dart';
 
 class TestWidget extends StatelessWidget with ScreenTransition {
