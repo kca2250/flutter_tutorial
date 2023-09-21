@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/mixin/transition_screen.dart';
+import 'package:flutter_training/mixin/screen_transition.dart';
 import 'package:flutter_training/views/screens/weather_screen.dart';
 
 class GreenScreen extends StatefulWidget {
@@ -10,7 +10,7 @@ class GreenScreen extends StatefulWidget {
 }
 
 class _GreenScreenState extends State<GreenScreen>
-    with WidgetsBindingObserver, TransitionScreen {
+    with WidgetsBindingObserver, ScreenTransition {
   @override
   void initState() {
     super.initState();
