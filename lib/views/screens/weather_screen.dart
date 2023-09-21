@@ -2,44 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_training/controller/weather_controller.dart';
 import 'package:flutter_training/mixin/screen_transition.dart';
+import 'package:flutter_training/mixin/show_alert.dart';
 import 'package:flutter_training/mixin/show_snackbar.dart';
 import 'package:flutter_training/provider/weather_result_provider.dart';
-import 'package:flutter_training/views/widgets/buttons.dart';
 import 'package:flutter_training/views/widgets/temperatures.dart';
+import 'package:flutter_training/views/widgets/text_buttons.dart';
 import 'package:flutter_training/views/widgets/weather_image.dart';
 
 class WeatherScreen extends ConsumerWidget
-    with WidgetsBindingObserver, ShowSnackBar, ScreenTransition {
+    with WidgetsBindingObserver, ShowSnackBar, ScreenTransition, ShowAlert {
   const WeatherScreen({super.key});
-
-  AlertDialog _alertBuilder(BuildContext context, {required String message}) {
-    return AlertDialog(
-      title: Text(message),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Close'),
-        ),
-      ],
-    );
-  }
-
-  void showAlert(BuildContext context, String message) {
-    showDialog<Widget>(
-      context: context,
-      builder: (context) => _alertBuilder(context, message: message),
-    );
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void changeWeatherIcon() {
+    final watchWeatherResult = ref.watch(weatherResultProvider);
+    final readWeatherResult = ref.read(weatherResultProvider.notifier);
+
+    void reloadWeatherIcon() {
       final weather = WeatherController().getWeather();
       if (weather.hasError) {
         showAlert(context, weather.errorMessage ?? 'internal error');
         return;
       }
-      ref.read(weatherResultProvider.notifier).state = weather;
+      readWeatherResult.state = weather;
       showSnackBar(
         context: context,
         message: 'weather condition changed',
@@ -54,10 +39,21 @@ class WeatherScreen extends ConsumerWidget
             const Spacer(
               flex: 2,
             ),
-            const WeatherImage(),
+            if (watchWeatherResult.weatherCondition == '')
+              const SizedBox(
+                height: 200,
+                width: 200,
+                child: Placeholder(),
+              )
+            else
+              SvgImage(
+                fileName: watchWeatherResult.weatherCondition,
+              ),
             const Tempreratures(),
             const Spacer(),
-            Buttons(onPress: changeWeatherIcon),
+            TextButtons(
+              reloadWeatherIcon: reloadWeatherIcon,
+            ),
             const Spacer(
               flex: 2,
             ),
