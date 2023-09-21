@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_training/mixin/screen_transition.dart';
-
-import '../test_widget/transition_test_next_widget.dart';
+import '../mock/widget/transition_test_next_widget.dart';
 
 class MockScreenTransitionClass with ScreenTransition {}
 
