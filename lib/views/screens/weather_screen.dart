@@ -9,7 +9,7 @@ import 'package:flutter_training/views/widgets/temperatures.dart';
 import 'package:flutter_training/views/widgets/weather_image.dart';
 
 class WeatherScreen extends ConsumerWidget
-    with WidgetsBindingObserver, SnackBarMixin, ScreenTransition {
+    with WidgetsBindingObserver, ShowSnackBar, ScreenTransition {
   const WeatherScreen({super.key});
 
   AlertDialog _alertBuilder(BuildContext context, {required String message}) {

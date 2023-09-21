@@ -15,7 +15,7 @@ class Buttons extends StatelessWidget with ScreenTransition {
             flex: 2,
           ),
           TextButton(
-            onPressed: () => backScreen(
+            onPressed: () => pushNewScreen(
               context,
               screen: const GreenScreen(),
             ),
